@@ -38,29 +38,31 @@ public class AnimationController : MonoBehaviour {
                     isDoorOpen = !isDoorOpen;
 
                     playerPosition = gameObject.GetComponent<Transform>();
-                    
+
 
                     if (isDoorOpen)
                     {
                         print("ATANAS");
                         //change position
                         toPlayAnimation.GetComponent<Animation>().Play("Door_Open");
+
                         toPlayAnimation.GetComponent<Animation>().PlayQueued("Door_Close");
                         this.GetComponent<Movement>().DoorOpen(isDoorOpen);
-                       
-                        this.transform.localPosition = new Vector3(-0.151f, 1.01f, -2.197f);
-                        if (!toPlayAnimation.GetComponent<Animation>().IsPlaying("Door_Open")) 
+                        this.GetComponent<CameraMovement>().DoorAnimationCamera(isDoorOpen);
+
+                        this.transform.parent.localPosition = new Vector3(-0.187f, 1.01f, -1.671f);
+                        if (!toPlayAnimation.GetComponent<Animation>().IsPlaying("Door_Open"))
                         {
                             toPlayAnimation.GetComponent<Animation>().Play("Door_Close");
                             isDoorOpen = !isDoorOpen;
-                            
+
                         }
 
-                       
+
                     }
 
-                    
-                   
+
+
 
                     //hit.collider.gameObject.GetComponentInParent<Collider>().gameObject.GetComponentInParent<Animation>().Play();
                     //foreach (AnimationState state in hit.collider.gameObject.GetComponent<Animation>())
