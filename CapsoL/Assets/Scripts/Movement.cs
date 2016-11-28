@@ -60,22 +60,24 @@ public class Movement : MonoBehaviour
     }
     void Move()
     {
-      
+
         if (anim.GetBool("Walk"))
         {
             anim.SetFloat("MoveZ", Mathf.Clamp(Input.GetAxis("MoveZ"), -.25f, .25f));
             anim.SetFloat("MoveX", Mathf.Clamp(Input.GetAxis("MoveX"), -.25f, .25f));
-            
+
         }
-        else
+        else if (!anim.GetBool("Walk"))
         {
+            if (Input.GetKeyDown(KeyCode.Q))
+            {
+                GetComponent<CameraMovement>().CameraRotateToObject(isWalking);
+
+            }
             anim.SetFloat("MoveZ", Input.GetAxis("MoveZ"));
             anim.SetFloat("MoveX", Input.GetAxis("MoveX"));
-            
-            //audioRun.PlayOneShot(RunSound,0.7f);
-            
         }
-      
+
     }
      public void DoorOpen(bool isDoorOpen)
     {
